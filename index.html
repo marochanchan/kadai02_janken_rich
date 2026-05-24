@@ -12,6 +12,22 @@
 <body>
 
   <!-- BGM -->
+<audio id="gameBgm" loop>
+  <source src="./audio/cafebgm.m4a" type="audio/mp4">
+</audio>
+
+<audio id="parkBgm" loop>
+  <source src="./audio/dokidoki.m4a" type="audio/mp4">
+</audio>
+
+<!-- 効果音 -->
+<audio id="startSe">
+  <source src="./audio/start.m4a" type="audio/mp4">
+</audio>
+
+<audio id="resultSe">
+  <source src="./audio/ending.m4a" type="audio/mp4">
+</audio>
 
   <!-- タイトル画面 -->
   <div id="titleScreen">
@@ -54,6 +70,17 @@
   <script>
 
 // BGM
+const gameBgm =
+  document.getElementById("gameBgm");
+
+const parkBgm =
+  document.getElementById("parkBgm");
+
+const startSe =
+  document.getElementById("startSe");
+
+const resultSe =
+  document.getElementById("resultSe");
 
 // 名前
 let playerName = "";
@@ -64,28 +91,38 @@ let love = 0;
 // スタートボタン
 $("#startBtn").click(function(){
 
+  // 効果音
+  startSe.play();
+
+  // 名前取得
   playerName = $("#playerName").val();
 
-  // 名前未入力なら
-
-  if (playerName === ""){
+  // 未入力なら
+  if(playerName === ""){
     playerName = "ゆうき";
   }
 
-// タイトル画面を消す
-$("#titleScreen").fadeOut(1000, function(){
-  // ゲーム画面を表示
-  $("#game").fadeIn(1000);
+  // 0.5秒後に画面切替
+  setTimeout(function(){
 
-   // BGM開始
-    // bgm.play();
+    // タイトル画面を消す
+    $("#titleScreen").fadeOut(1000, function(){
 
-  // 最初のシーン
-  scene1();
+      // ゲーム画面表示
+      $("#game").fadeIn(1000);
 
-  });
+      // ゲームBGM開始
+  gameBgm.volume = 0.5;
+  gameBgm.play();
 
-  });
+      // 最初のシーン
+      scene1();
+
+    });
+
+  }, 500);
+
+});
 
   // BGM ON/OFF
 
@@ -106,6 +143,7 @@ $("#titleScreen").fadeOut(1000, function(){
 // シーン1
 
 function scene1(){
+
 $("#character").attr(
   "src",
   "./img/classroom.png"
@@ -210,6 +248,12 @@ function scene2() {
 
 function scene3() {
 
+  gameBgm.pause();
+  gameBgm.currentTime = 0;
+
+  parkBgm.volume = 0.5;
+  parkBgm.play();
+
   $("#character")
     .fadeOut(300, function () {
 
@@ -249,6 +293,10 @@ function scene3() {
 // エンディング
 
 function ending() {
+
+ // 公園BGM停止
+  parkBgm.pause();
+  parkBgm.currentTime = 0;
 
   const num = Math.random();
 
@@ -290,7 +338,11 @@ function ending() {
 
   }
 
-  typeText(result);
+ // エンディング効果音
+resultSe.play();
+
+// 結果表示
+typeText(result);
 
   $("#choices").html(`
     <button
