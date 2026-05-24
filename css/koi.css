@@ -1,0 +1,241 @@
+body {
+
+  margin: 0;
+
+  background: #ffdce8;
+
+  font-family: sans-serif;
+
+  overflow: hidden;
+
+}
+
+/* タイトル画面 */
+
+#titleScreen {
+
+  width: 100%;
+  height: 100vh;
+
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: center;
+
+  align-items: center;
+
+  background:
+    linear-gradient(
+      135deg,
+      #ffb3c6,
+      #ffc8dd
+    );
+
+}
+
+/* タイトル */
+
+#gameTitle {
+
+  font-size: 64px;
+
+  color: white;
+
+  margin-bottom: 10px;
+
+  text-shadow: 0 0 10px rgba(0,0,0,0.2);
+
+}
+
+.subTitle {
+
+  color: white;
+
+  font-size: 24px;
+
+  margin-bottom: 40px;
+
+}
+
+/* 名前入力 */
+
+#playerName {
+
+  width: 250px;
+
+  padding: 12px;
+
+  font-size: 18px;
+
+  border: none;
+
+  border-radius: 10px;
+
+  margin-bottom: 20px;
+
+}
+
+/* スタートボタン */
+
+#startBtn {
+
+  padding: 15px 40px;
+
+  font-size: 20px;
+
+  border: none;
+
+  border-radius: 10px;
+
+  background: #ff5d8f;
+
+  color: white;
+
+  cursor: pointer;
+
+}
+
+#startBtn:hover {
+
+  background: #ff2e6d;
+
+}
+
+/* ゲーム画面 */
+
+#game {
+
+  width: 800px;
+  height: 600px;
+
+  position: relative;
+
+  margin: 20px auto;
+
+  overflow: hidden;
+
+  display: none;
+
+  border-radius: 20px;
+
+  box-shadow: 0 0 20px rgba(0,0,0,0.2);
+
+}
+
+/* 背景 */
+
+/* #background {
+
+  width: 100%;
+  height: 100%;
+
+  position: absolute;
+
+  background-size: cover;
+
+  background-position: center;
+
+} */
+
+/* キャラ */
+
+#character {
+
+  width: 100%;
+  height: 100%;
+
+  /* position: absolute; */
+
+  /* background-size: cover;
+
+  background-position: center; */
+}
+
+/* 会話欄 */
+
+#dialogue {
+
+  position: absolute;
+
+  bottom: 100px;
+  left: 20px;
+
+  width: 720px;
+
+  min-height: 100px;
+
+  background: rgba(255,255,255,0.9);
+
+  border-radius: 15px;
+
+  padding: 20px;
+
+  font-size: 24px;
+
+  z-index: 3;
+
+}
+
+/* 選択肢 */
+
+#choices {
+
+  position: absolute;
+
+  bottom: 20px;
+
+  width: 100%;
+
+  text-align: center;
+
+  z-index: 3;
+
+}
+
+.choiceBtn {
+
+  padding: 12px 25px;
+
+  margin: 0 10px;
+
+  border: none;
+
+  border-radius: 10px;
+
+  background: #ff8fb3;
+
+  color: white;
+
+  font-size: 18px;
+
+  cursor: pointer;
+
+}
+
+.choiceBtn:hover {
+
+  background: #ff5d8f;
+
+}
+
+/* BGMボタン */
+/* 
+#bgmBtn {
+
+  position: absolute;
+
+  top: 10px;
+  right: 10px;
+
+  z-index: 10;
+
+  padding: 10px 15px;
+
+  border: none;
+
+  border-radius: 10px;
+
+  background: rgba(255,255,255,0.8);
+
+} */

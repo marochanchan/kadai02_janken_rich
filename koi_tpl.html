@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <script src="js/jquery-2.1.3.min.js"></script>
+  <link rel="stylesheet" href="css/koi.css">
+  <title>G's Love Story</title>
+</head>
+
+<body>
+
+  <!-- BGM -->
+
+  <!-- タイトル画面 -->
+  <div id="titleScreen">
+    <h1 id="gameTitle">G's Love Story</h1>
+
+    <p class="subTitle">火曜日の恋</p>
+
+    <input
+    type="text"
+    id="playerName"
+    placeholder="名前を入力"
+    >
+
+    <br>
+
+    <button id="startBtn">GAME START</button>
+
+  </div>
+
+  <!-- ゲーム画面 -->
+  <div id="game">
+
+    <!-- キャラ画像 -->
+    <img id="character" src="./img/classroom.png" alt="キャラクター">
+
+    <!-- 会話 -->
+    <div id="dialogue"></div>
+
+    <!-- 選択肢 -->
+    <div id="choices"></div>
+
+    <!-- BGMボタン -->
+
+    <!-- <button id="bgmBtn">
+      ♪ BGM
+    </button> -->
+
+  </div>
+
+  <script>
+
+// BGM
+
+// 名前
+let playerName = "";
+
+// 好感度
+let love = 0;
+
+// スタートボタン
+$("#startBtn").click(function(){
+
+  playerName = $("#playerName").val();
+
+  // 名前未入力なら
+
+  if (playerName === ""){
+    playerName = "ゆうき";
+  }
+
+// タイトル画面を消す
+$("#titleScreen").fadeOut(1000, function(){
+  // ゲーム画面を表示
+  $("#game").fadeIn(1000);
+
+   // BGM開始
+    // bgm.play();
+
+  // 最初のシーン
+  scene1();
+
+  });
+
+  });
+
+  // BGM ON/OFF
+
+// $("#bgmBtn").click(function () {
+
+//   if (bgm.paused) {
+
+//     bgm.play();
+
+//   } else {
+
+//     bgm.pause();
+
+//   }
+
+// });
+
+// シーン1
+
+function scene1(){
+$("#character").attr(
+  "src",
+  "./img/classroom.png"
+);
+
+typeText(
+    `${playerName}くん！
+このあとお茶でもどう？`,
+    function () {
+
+      $("#choices").html(`
+        <button
+          class="choiceBtn"
+          id="staBtn"
+        >
+          スタバに行く
+        </button>
+
+        <button
+          class="choiceBtn"
+          id="DotBtn"
+        >
+          ドトールに行く
+        </button>
+      `);
+
+      $("#staBtn").click(function () {
+
+        love++;
+
+        scene2();
+
+      });
+
+      $("#DotBtn").click(function () {
+
+        scene2();
+
+      });
+
+    }
+  );
+
+}
+
+// シーン2
+
+function scene2() {
+
+  $("#character")
+    .fadeOut(300, function () {
+
+      $(this)
+        .attr(
+    "src",
+    "./img/cafe.png"
+        )
+        .fadeIn(300);
+
+    });
+
+  typeText(
+    "なに頼む？",
+    function () {
+
+      $("#choices").html(`
+        <button
+          class="choiceBtn"
+          id="frapBtn"
+        >
+          フラペチーノ
+        </button>
+
+        <button
+          class="choiceBtn"
+          id="coffeBtn"
+        >
+          コーヒー
+        </button>
+      `);
+
+      $("#frapBtn").click(function () {
+
+        love++;
+
+        scene3();
+
+      });
+
+      $("#coffeBtn").click(function () {
+
+        scene3();
+
+      });
+
+    }
+  );
+
+}
+
+// シーン3
+
+function scene3() {
+
+  $("#character")
+    .fadeOut(300, function () {
+
+      $(this)
+        .attr(
+    "src",
+    "./img/park.png"
+        )
+        .fadeIn(300);
+
+    });
+
+  typeText(
+    "今日は楽しかったね！わたし実は…",
+    function () {
+
+      $("#choices").html(`
+        <button
+          class="choiceBtn"
+          id="confessBtn"
+        >
+          告白する
+        </button>
+      `);
+
+      $("#confessBtn").click(function () {
+
+        ending();
+
+      });
+
+    }
+  );
+
+}
+
+// エンディング
+
+function ending() {
+
+  const num = Math.random();
+
+  let result = "";
+
+  // TRUE END
+
+  if (love >= 2 && num < 0.7) {
+
+    result =
+      "嬉しい、私も好きだよ";
+
+  }
+
+  // 成功
+
+  else if (num < 0.5) {
+
+    result =
+      "私も友達としては好きだよ";
+
+  }
+
+  // 保留
+
+  else if (num < 0.8) {
+
+    result =
+      "ごめん、少し考えさせて…";
+
+  }
+
+  // 失敗
+
+  else {
+
+    result =
+      "キモ";
+
+  }
+
+  typeText(result);
+
+  $("#choices").html(`
+    <button
+      class="choiceBtn"
+      onclick="location.reload()"
+    >
+      もう一回遊ぶ
+    </button>
+  `);
+
+}
+
+// タイピング演出
+
+function typeText(text, callback){
+
+  const dialogue =
+    $("#dialogue");
+
+  dialogue.html("");
+
+  let index = 0;
+
+  const typing =
+    setInterval(() => {
+
+    if (index < text.length) {
+
+      dialogue.html(
+        dialogue.html() +
+        text.charAt(index)
+      );
+
+      index++;
+
+    } else {
+
+      clearInterval(typing);
+
+      if (callback) {
+
+        callback();
+
+      }
+
+    }
+
+  }, 50);
+
+}
+
+
+  </script>
+</body>
+
+</html>
