@@ -5,7 +5,7 @@ G's Love Story 〜火曜日の恋〜
 - 簡単な恋愛シミュレーションゲームを作りました。
 
 ## ③アプリのデプロイURL
-- https://marochanchan.github.io/kadai00_cheese/
+- https://marochanchan.github.io/kadai02_janken_rich/
 
 ## ④アプリのログイン用IDまたはPassword（ある場合）
 - ID: 今回なし
